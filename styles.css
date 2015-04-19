@@ -4,6 +4,13 @@ html, body {
 	width: 100%
 }
 
-/*.mainContainer {
-	
-}*/
+#bodyWhiteframe {
+	width: 60%;
+	margin 10px auto;
+	height: 100%;
+}
+
+#face {
+	height: 150px;
+	width: auto;
+}

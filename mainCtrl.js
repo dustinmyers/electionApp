@@ -2,15 +2,22 @@ var app = angular.module('governmentApp');
 app.controller('governmentCtrl', function($scope, governmentService) {
 	
 	// $scope.test = 'test'; successful
+	$scope.title1 = 'Submit';
 
 
-	$scope.getElectionsInfo = function() {
-		governmentService.getInfo().then(function(response){
-			$scope.officials = response;
+	$scope.getOfficials = function() {
+		governmentService.getOfficialsInfo($scope.userAddress, $scope.userCity, $scope.userState, $scope.userPostalCode)
+		.then(function(countryResult, congressResults, stateResult) {
+			$scope.countryOfficials = countryResult;
+			$scope.stateOfficials = stateResult;
+			$scope.congressOfficials = congressResults;
 		})
 	}
 
-	$scope.getElectionsInfo();
+	$scope.getOfficials();
+
+
+
 
 
 

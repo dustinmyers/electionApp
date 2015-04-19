@@ -3,36 +3,129 @@
 <head>
 	<title>Your Government Officials</title>
 	<link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="home.html">
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+</head>
+<body ng-app="governmentApp">
+    <div>
+    <div ng-controller='governmentCtrl' class='mainContainer' flex>
+        <md-toolbar md-scroll-shrink class='md-default-theme' layout='fill-width' flex layout='center'>
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <h1 class="md-flex" class="md-display-3">My Government</h1>            
+        <span flex></span>
+            <a href='home.html' layout-margin>Home</a>
+            <a href='home.html' layout-margin>Search</a>
+            <a href='home.html' layout-margin>Elections</a>
+        </div>
+        </md-toolbar>
+
+        <div id='bodyContainer' flex class='md-secondary-theme' layout="row" flex layout-align="center start">
+        <md-whiteframe id='bodyWhiteframe' class="md-whiteframe-z1" layout >
+            <div flex>
+                <md-content layout-padding >
+                    <form name="userForm" flex>
+                      <div layout layout-sm="column">
+                        <md-input-container flex>
+                          <label>Address</label>
+                          <input ng-model="userAddress">
+                        </md-input-container>
+                      <div layout layout-sm="column">
+                        <md-input-container flex>
+                          <label>City</label>
+                          <input ng-model="userCity">
+                        </md-input-container>
+                        <md-input-container flex>
+                          <label>State (UT)</label>
+                          <input ng-model="userState">
+                        </md-input-container>
+                        <md-input-container flex>
+                          <label>Postal Code</label>
+                          <input ng-model="userPostalCode">
+                        </md-input-container>
+                        <md-button md-no-ink class="md-primary" ng-click="getOfficials()">{{title1}}</md-button>
+                      </div>
+                    </form>
+                </md-content> 
+            </div>
+
+            
+        </md-whiteframe>
+
+            <md-whiteframe layout='fill-width'>
+              <h2 class="md-display-1">Country Officials</h2>
+            </md-whiteframe>
+
+            <md-content>
+                <md-list>
+                  <md-list-item ng-repeat="countryOfficial in countryOfficials" layout='row' layout-wrap>
+                    <img ng-src="{{countryOfficial.photo}}?{{$index}}" style='height: 150px' class="face" layout-margin>
+                    <div class="md-list-item-text">
+                      <h3 >{{countryOfficial.name}}</h3>
+                      <h4>{{countryOfficial.party}}</h4>
+                      <p>{{countryOfficial.website}}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+            </md-content>     
+            
+            <md-divider md-inset ng-if="!$last"></md-divider>
+
+            <md-toolbar md-scroll-shrink class='md-default-theme' layout='fill-width' flex layout='center'>
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                    <h1 class="md-flex" class="md-display-3">Congressional Officials</h1>
+                </div>            
+            </md-toolbar>
+
+            <md-content>
+                <md-list>
+                  <md-list-item ng-repeat="congressOfficial in congressOfficials" layout='row' layout-wrap>
+                    <img ng-src="{{congressOfficial.photo}}?{{$index}}" style='height: 150px' class="face" layout-margin>
+                    <div class="md-list-item-text">
+                      <h3 >{{congressOfficial.name}}</h3>
+                      <h4>{{congressOfficial.party}}</h4>
+                      <p>{{congressOfficial.website}}</p>
+                    </div>
+                  </md-list-item>
+                  <md-divider ></md-divider>
+                </md-list>
+            </md-content>
+
+            <md-divider md-inset ng-if="!$last"></md-divider>
+
+            <md-toolbar md-scroll-shrink class='md-default-theme' layout='fill-width' flex layout='center'>
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                    <h1 class="md-flex" class="md-display-3">State Officials</h1>
+                </div>            
+            </md-toolbar>
+
+            <md-content>
+                <md-list>
+                  <md-list-item ng-repeat="stateOfficial in stateOfficials" layout='row' layout-wrap>
+                    <img ng-src="{{stateOfficial.photo}}?{{$index}}" style='height: 150px' class="face" layout-margin>
+                    <div class="md-list-item-text">
+                      <h3 >{{stateOfficial.name}}</h3>
+                      <h4>{{stateOfficial.party}}</h4>
+                      <p>{{stateOfficial.website}}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+            </md-content>
+
+    </div> <!-- end controller -->
+
+                    <img ng-src="{{official.photo}}" >
+<!--         <footer ng-include="'templates/footer.html'"></footer>
+ --></div><!-- end -->
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
     <script> src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js'</script>
-	<script src='mainApp.js'></script>
-	<script src='mainCtrl.js'></script>
-	<script src='mainService.js'></script>
-</head>
-<body ng-app="governmentApp">
-	<div ng-controller='governmentCtrl' class='mainContainer' flex>
-		<md-toolbar class='md-default-theme' layout='fill-width' flex layout='center'>
-		<div class="md-toolbar-tools">
-          <h1 class="md-flex" class="md-display-3">My Government</h1>
-        </div>
-        </md-toolbar>
-
-        <div flex class='md-secondary-theme' layout="row" flex='15'>
-        	<div flex ng-repeat="official in officials">
-        		
-        	</div>
-        	
-        </div>
-
-
-
-	</div><!-- end -->
-
+    <script src='mainApp.js'></script>
+    <script src='mainCtrl.js'></script>
+    <script src='mainService.js'></script>
 </body>
 </html>
